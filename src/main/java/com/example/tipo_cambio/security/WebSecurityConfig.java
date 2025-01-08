@@ -30,8 +30,7 @@ public class WebSecurityConfig {
     SecurityFilterChain web (HttpSecurity http) throws Exception {
         return http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                .csrf(csrf -> csrf
-                        .ignoringRequestMatchers("/h2-console/**"))
+                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth  ->
                         auth.requestMatchers("/api/login").permitAll()
                                 .requestMatchers(PathRequest.toH2Console()).permitAll()
